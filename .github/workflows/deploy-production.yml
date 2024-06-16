@@ -6,8 +6,8 @@ on:
   workflow_dispatch:
 
 env:
-  SERVER_IMAGE_NAME: prochainweb-server:latest
-  CLIENT_IMAGE_NAME: prochainweb-client:latest
+  SERVER_IMAGE_NAME: mamiepierre-server:latest
+  CLIENT_IMAGE_NAME: mamiepierre-client:latest
 
 jobs:
   publish:

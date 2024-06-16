@@ -1,6 +1,6 @@
 version: '3.9'
 services:
-  prochainweb-database:
+  mamiepierre-database:
     image: postgres:latest
     environment:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-postgres}
@@ -14,11 +14,11 @@ services:
     ports:
       - 5434:5432
     volumes:
-      - prochainweb-database-data:/var/lib/postgresql/data
+      - mamiepierre-database-data:/var/lib/postgresql/data
 
-  prochainweb-server:
+  mamiepierre-server:
     depends_on:
-      prochainweb-database:
+      mamiepierre-database:
         condition: service_healthy
     env_file: server/.env.production
     healthcheck:
@@ -34,7 +34,7 @@ services:
     volumes:
       - mamiepierre-images:/app/public/uploads
 
-  prochainweb-client:
+  mamiepierre-client:
     build:
       context: client
       dockerfile: Dockerfile.production
@@ -44,9 +44,9 @@ services:
 
   gateway:
     depends_on:
-      prochainweb-client:
+      mamiepierre-client:
         condition: service_started
-      prochainweb-server:
+      mamiepierre-server:
         condition: service_healthy
     restart: always
     build:
@@ -56,5 +56,5 @@ services:
       - ${GATEWAY_PORT-8001}:80
 
 volumes:
-  prochainweb-database-data:
+  mamiepierre-database-data:
   mamiepierre-images:

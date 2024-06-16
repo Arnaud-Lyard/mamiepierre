@@ -1,15 +1,15 @@
 version: '3.9'
 
 services:
-  prochainweb-database:
+  mamiepierre-database:
     image: postgres:latest
     restart: 'no'
     environment:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: password123
-      POSTGRES_DB: prochainweb
+      POSTGRES_DB: mamiepierre
     healthcheck:
-      test: ['CMD-SHELL', 'pg_isready -U admin -d prochainweb']
+      test: ['CMD-SHELL', 'pg_isready -U admin -d mamiepierre']
       interval: 10s
       timeout: 5s
       retries: 5
@@ -18,11 +18,11 @@ services:
     expose:
       - 5432
     volumes:
-      - prochainweb-database:/var/lib/postgresql/data
+      - mamiepierre-database:/var/lib/postgresql/data
 
-  prochainweb-server:
+  mamiepierre-server:
     depends_on:
-      prochainweb-database:
+      mamiepierre-database:
         condition: service_healthy
     build: './server'
     ports:
@@ -30,7 +30,7 @@ services:
     volumes:
       - ./server/src:/app/src
 
-  prochainweb-upload-service:
+  mamiepierre-upload-service:
     build: file-upload-service
     ports:
       - 8000:8000
@@ -38,4 +38,4 @@ services:
       - ./file-upload-service/files:/app/files
 
 volumes:
-  prochainweb-database:
+  mamiepierre-database:
