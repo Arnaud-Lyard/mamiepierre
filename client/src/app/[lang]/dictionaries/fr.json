@@ -1,0 +1,64 @@
+{
+  "navigation": {
+    "button": "Ouvrir le menu utilisateur",
+    "authentication": "Authentification",
+    "login": "Connexion",
+    "logout": "Déconnexion",
+    "register": "Inscription",
+    "profile": "Mon profil"
+  },
+  "forgotPassword": {
+    "title": "Mot de passe oublié",
+    "formLabel": "Adresse e-mail",
+    "button": "Envoyer"
+  },
+  "register": {
+    "title": "Créer un nouveau compte",
+    "formLabelOne": "Nom d'utilisateur",
+    "formLabelTwo": "Adresse e-mail",
+    "formLabelThree": "Mot de passe",
+    "formLabelFour": "Confirmer le mot de passe",
+    "button": "S'inscrire",
+    "text": "Vous avez déjà un compte ?",
+    "link": "Se connecter"
+  },
+  "login": {
+    "title": "Connectez-vous à votre compte",
+    "formLabelOne": "Adresse e-mail",
+    "formLabelTwo": "Mot de passe",
+    "forgotPassword": "Mot de passe oublié ?",
+    "button": "Se connecter",
+    "buttonCancel": "Retour",
+    "text": "Vous n'avez pas de compte ?",
+    "link": "S'inscrire"
+  },
+  "resetPassword": {
+    "title": "Réinitialiser le mot de passe",
+    "formLabelOne": "Nouveau mot de passe",
+    "formLabelTwo": "Confirmer le mot de passe",
+    "button": "Réinitialiser"
+  },
+  "verifyEmail": {
+    "confirm": "Votre adresse e-mail a été vérifiée",
+    "text": "Vous serez redirigé dans quelques secondes."
+  },
+  "profile": {
+    "titleOne": "Mon profil",
+    "titleOneDescription": "Ces informations seront affichées publiquement, faites attention à ce que vous partagez.",
+    "titleTwo": "Informations personnelles",
+    "titleTwoDescription": "Ces informations sont uniquement visibles par vous.",
+    "titleThree": "Notifications",
+    "titleThreeDescription": "Nous vous informerons toujours des changements importants, mais choisissez vos préférences de communication.",
+    "formLabelOne": "Nom d'utilisateur",
+    "formLabelTwo": "Avatar",
+    "formLabelThree": "Adresse e-mail",
+    "formLabelFour": "Notifications du site",
+    "formLabelFourDescription": "Les notifications sont seulement visible sur le site.",
+    "formLabelFourOptions": {
+      "optionOne": "Toutes les notifications",
+      "optionTwo": "Aucune notification"
+    },
+    "buttonSubmit": "Enregistrer",
+    "buttonCancel": "Annuler"
+  }
+}

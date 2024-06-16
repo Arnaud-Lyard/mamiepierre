@@ -1,0 +1,64 @@
+{
+  "navigation": {
+    "button": "Open user menu",
+    "login": "Login",
+    "authentication": "Authentication",
+    "logout": "Logout",
+    "register": "Register",
+    "profile": "My profile"
+  },
+  "forgotPassword": {
+    "title": "Forgot Password",
+    "formLabel": "Email Adress",
+    "button": "Send"
+  },
+  "register": {
+    "title": "Register new account",
+    "formLabelOne": "Username",
+    "formLabelTwo": "Email Adress",
+    "formLabelThree": "Password",
+    "formLabelFour": "Confirm Password",
+    "button": "Register",
+    "text": "Already have an account?",
+    "link": "Login"
+  },
+  "login": {
+    "title": "Login to your account",
+    "formLabelOne": "Email Adress",
+    "formLabelTwo": "Password",
+    "forgotPassword": "Forgot password?",
+    "button": "Login",
+    "buttonCancel": "Cancel",
+    "text": "Don't have an account?",
+    "link": "Register"
+  },
+  "resetPassword": {
+    "title": "Reset password",
+    "formLabelOne": "New password",
+    "formLabelTwo": "Confirm password",
+    "button": "Reset"
+  },
+  "verifyEmail": {
+    "confirm": "Your email address has been verified",
+    "text": "You will be redirected in few seconds."
+  },
+  "profile": {
+    "titleOne": "My profile",
+    "titleOneDescription": "This information will be displayed publicly so be careful what you share.",
+    "titleTwo": "Personal Information",
+    "titleTwoDescription": "This information is only visible by you.",
+    "titleThree": "Notifications",
+    "titleThreeDescription": "We'll always let you know about important changes, but you pick what else you want to hear about.",
+    "formLabelOne": "Username",
+    "formLabelTwo": "Avatar",
+    "formLabelThree": "Email Adress",
+    "formLabelFour": "Site notifications",
+    "formLabelFourDescription": "The notifications are only visible on the website.",
+    "formLabelFourOptions": {
+      "optionOne": "Receive notifications",
+      "optionTwo": "Don't receive notifications"
+    },
+    "buttonSubmit": "Save",
+    "buttonCancel": "Cancel"
+  }
+}

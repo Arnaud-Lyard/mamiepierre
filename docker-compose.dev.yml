@@ -1,0 +1,41 @@
+version: '3.9'
+
+services:
+  prochainweb-database:
+    image: postgres:latest
+    restart: 'no'
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password123
+      POSTGRES_DB: prochainweb
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U admin -d prochainweb']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    ports:
+      - 5435:5432
+    expose:
+      - 5432
+    volumes:
+      - prochainweb-database:/var/lib/postgresql/data
+
+  prochainweb-server:
+    depends_on:
+      prochainweb-database:
+        condition: service_healthy
+    build: './server'
+    ports:
+      - 4000:4000
+    volumes:
+      - ./server/src:/app/src
+
+  prochainweb-upload-service:
+    build: file-upload-service
+    ports:
+      - 8000:8000
+    volumes:
+      - ./file-upload-service/files:/app/files
+
+volumes:
+  prochainweb-database:

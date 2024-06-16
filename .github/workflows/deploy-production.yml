@@ -1,0 +1,48 @@
+name: vps-deploy
+
+on:
+  push:
+    branches: ['main']
+  workflow_dispatch:
+
+env:
+  SERVER_IMAGE_NAME: prochainweb-server:latest
+  CLIENT_IMAGE_NAME: prochainweb-client:latest
+
+jobs:
+  publish:
+    name: publish docker images
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Login to DockerHub
+        run: echo ${{ secrets.DOCKERHUB_TOKEN }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+
+      - name: Build and push server image
+        run: |
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/$SERVER_IMAGE_NAME -f server/Dockerfile.production server/
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/$SERVER_IMAGE_NAME
+
+      - name: Build and push client image
+        run: |
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/$CLIENT_IMAGE_NAME -f client/Dockerfile.production client/
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/$CLIENT_IMAGE_NAME
+
+  deploy:
+    needs: publish
+    name: deploy image in remote vps
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: SSH into remote server and deploy
+        uses: appleboy/ssh-action@v0.1.3
+        with:
+          host: ${{ secrets.REMOTE_SSH_HOST }}
+          username: ${{ secrets.REMOTE_SSH_USER }}
+          password: ${{ secrets.REMOTE_SSH_PASSWORD }}
+          port: 22
+          script: |
+            cd ${{ secrets.REMOTE_WORKING_DIRECTORY }}
+            ./deploy-production.sh

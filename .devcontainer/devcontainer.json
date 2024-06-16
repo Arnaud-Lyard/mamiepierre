@@ -1,0 +1,7 @@
+{
+  "name": "tournament",
+  "dockerComposeFile": "../docker-compose.dev.yml",
+  "service": "tournament-server",
+  "workspaceFolder": "/tournament",
+  "forwardPorts": ["4000", "5435", "5432"]
+}

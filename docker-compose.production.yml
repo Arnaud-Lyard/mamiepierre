@@ -1,0 +1,60 @@
+version: '3.9'
+services:
+  prochainweb-database:
+    image: postgres:latest
+    environment:
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-postgres}
+      - POSTGRES_USER=${POSTGRES_USER:-postgres}
+      - POSTGRES_DB=${POSTGRES_DB:-postgres}
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    ports:
+      - 5434:5432
+    volumes:
+      - prochainweb-database-data:/var/lib/postgresql/data
+
+  prochainweb-server:
+    depends_on:
+      prochainweb-database:
+        condition: service_healthy
+    env_file: server/.env.production
+    healthcheck:
+      test: ['CMD', 'curl', '-f', 'http://localhost:4001/api']
+      interval: 120s
+      timeout: 5s
+      retries: 5
+    build:
+      context: server
+      dockerfile: Dockerfile.production
+    ports:
+      - 4001:4001
+    volumes:
+      - mamiepierre-images:/app/public/uploads
+
+  prochainweb-client:
+    build:
+      context: client
+      dockerfile: Dockerfile.production
+      args:
+        NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL}
+        JWT_PUBLIC_KEY: ${JWT_PUBLIC_KEY}
+
+  gateway:
+    depends_on:
+      prochainweb-client:
+        condition: service_started
+      prochainweb-server:
+        condition: service_healthy
+    restart: always
+    build:
+      context: gateway
+      dockerfile: Dockerfile.production
+    ports:
+      - ${GATEWAY_PORT-8001}:80
+
+volumes:
+  prochainweb-database-data:
+  mamiepierre-images:

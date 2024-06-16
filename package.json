@@ -1,0 +1,10 @@
+{
+  "engines": {
+    "node": ">=20.10.0"
+  },
+  "scripts": {
+    "docker:up": "docker compose up -d",
+    "docker:down": "docker compose down",
+    "docker:dropAll": "docker stop $(docker ps -a -q) && docker system prune -f"
+  }
+}
